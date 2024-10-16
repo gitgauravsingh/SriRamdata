@@ -1,86 +1,88 @@
-import React, { useRef, useState } from "react";
-import Style from "./sriram.module.scss";
+import React, { useEffect, useRef, useState } from "react";
+import Style from "./vedio.module.scss";
 
-export interface ISriRam {
-  isSriRam: boolean;
-  setIsSriRam: (value: boolean) => void;
+export interface IVedio {
+  isfirstvedio: boolean;
+  setIsfirstvedio: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
+const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
+  const [isSecondvedio, setIsSecondvedio] = useState(false);
+  const [thirdvedio, setThirdvedio] = useState(false);
+  const [fourthvedio, setFourthvedio] = useState(false);
+  const [fifthvedio, setFifthvedio] = useState(false);
+  const [zoomin, setZoomin] = useState(false);
   const [showRoseVideo, setShowRoseVideo] = useState(false);
   const [showPrashadVedio, setShowPrashadVedio] = useState(false);
   const [showDiyaVedio, setShowDiyaVedio] = useState(false);
   const [showArtiVedio, setShowArtiVedio] = useState(false);
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
-  const [isRoseAudioPlaying, setIsRoseAudioPlaying] = useState(false);
+  const [videoEndedFirst, setVideoEndedFirst] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const fifthvedioref = useRef<HTMLVideoElement>(null);
-  const roseref = useRef<HTMLAudioElement>(null);
-  const prashadref = useRef<HTMLAudioElement>(null);
-  const diyaref = useRef<HTMLAudioElement>(null);
-  const artiref = useRef<HTMLAudioElement>(null);
-
-  const Roseended = () => {
-    setShowRoseVideo(false);
+  const audioref = useRef<HTMLAudioElement>(null);
+  const videoRefs = {
+    second: useRef<HTMLVideoElement>(null),
+    third: useRef<HTMLVideoElement>(null),
+    fourth: useRef<HTMLVideoElement>(null),
+    fifth: useRef<HTMLVideoElement>(null),
+    rose: useRef<HTMLVideoElement>(null),
+    prashad: useRef<HTMLVideoElement>(null),
+    diya: useRef<HTMLVideoElement>(null),
+    arti: useRef<HTMLVideoElement>(null),
   };
 
-  const Prashadended = () => {
-    setShowPrashadVedio(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleVideoEnd = () => {
+    setIsSecondvedio(true);
+    setZoomin(true);
   };
 
-  const diyaended = () => {
-    setShowDiyaVedio(false);
+  const handleThirdVideoEnd = () => {
+    setFourthvedio(true);
+    setZoomin(true);
   };
 
-  const artiended = () => {
-    setShowArtiVedio(false);
+  const handleFifthVideoEnd = () => {
+    setVideoEnded(true);
+    setVideoEndedFirst(false);
   };
 
-  const handleRoseClick = () => {
-    setShowRoseVideo(true);
-    if (roseref.current) {
-      if (!isRoseAudioPlaying) {
-        roseref.current.play();
-        setIsRoseAudioPlaying(true);
-      }
-    }
-    setVideoEnded(false);
-    setShowButtonBar(false);
+  const playVideo = (
+    ref: React.RefObject<HTMLVideoElement>,
+    audioRef: React.RefObject<HTMLAudioElement>
+  ) => {
+    ref.current?.play();
+    audioRef.current?.play();
   };
 
-  const handlePrashadClick = () => {
-    setShowPrashadVedio(true);
-    if (prashadref.current) {
-      prashadref.current.play();
-    }
-    setVideoEnded(false);
-    setShowButtonBar(false);
+  const handleShowVideo = (
+    setter: React.Dispatch<React.SetStateAction<boolean>>,
+    ref: React.RefObject<HTMLVideoElement>,
+    audioRef: React.RefObject<HTMLAudioElement>
+  ) => {
+    setter(true);
+    playVideo(ref, audioRef);
   };
 
-  const handleDiyaClick = () => {
-    setShowDiyaVedio(true);
-    if (diyaref.current) {
-      diyaref.current.play();
-    }
-    setVideoEnded(false);
-    setShowButtonBar(false);
-  };
-
-  const handleArtiClick = () => {
-    setShowArtiVedio(true);
-    if (artiref.current) {
-      artiref.current.play();
-    }
-    setVideoEnded(false);
-    setShowButtonBar(false);
-  };
+  const handleRoseClick = () =>
+    handleShowVideo(setShowRoseVideo, videoRefs.rose, audioref);
+  const handlePrashadClick = () =>
+    handleShowVideo(setShowPrashadVedio, videoRefs.prashad, audioref);
+  const handleDiyaClick = () =>
+    handleShowVideo(setShowDiyaVedio, videoRefs.diya, audioref);
+  const handleArtiClick = () =>
+    handleShowVideo(setShowArtiVedio, videoRefs.arti, audioref);
 
   const handleTimeUpdate = () => {
-    if (fifthvedioref.current) {
-      const currentTime = fifthvedioref.current.currentTime;
-      const duration = fifthvedioref.current.duration;
+    if (videoRefs.fifth.current) {
+      const { currentTime, duration } = videoRefs.fifth.current;
       if (duration - currentTime <= 15) {
         setShowButtonBar(true);
         setVideoEndedFirst(true);
@@ -88,46 +90,152 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
     }
   };
 
-  const handleFifthVideoEnd = () => {
-    setIsSriRam(false);
-    setVideoEnded(true);
-    setVideoEndedFirst(false);
-  };
-
-  const handleRoseAudioEnd = () => {
-    setIsRoseAudioPlaying(false);
-  };
-
   return (
-    <div className={Style.Sriramji}>
-      {isSriRam && (
+    <div className={Style.vediobar}>
+      {isfirstvedio && (
+        <div className={Style.firstvedio}>
+          <video
+            onEnded={handleVideoEnd}
+            autoPlay
+            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+          >
+            <source
+              src={
+                !isMobile
+                  ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v1.mp4"
+                  : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v1.mp4"
+              }
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      )}
+      {isSecondvedio && (
+        <div className={Style.secondvedio}>
+          <video
+            ref={videoRefs.second}
+            autoPlay
+            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+          >
+            <source
+              src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/desktop-ghanta1-vp9-chrome.webm"
+              type="video/mp4"
+            />
+          </video>
+          <div className={Style.iconimg}>
+            <img
+              src="https://images.bhaskarassets.com/thumb/128x0/web2images/web-frontend/3D-Ram-Mandir/new-bell-icon-hi.png"
+              alt=""
+              onClick={() => playVideo(videoRefs.second, audioref)}
+            />
+            <audio ref={audioref}>
+              <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/ghanta2.mp3" />
+            </audio>
+          </div>
+          <div className={Style.buttonbar}>
+            <img
+              className={`${zoomin ? Style.zoomin : ""} ${
+                zoomin ? Style.zoomAnimation : ""
+              }`}
+              src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/cta-button-2-hi.png"
+              alt=""
+              onClick={() => {
+                setIsfirstvedio(false);
+                setIsSecondvedio(false);
+                setThirdvedio(true);
+                setZoomin(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {thirdvedio && (
+        <div className={Style.thirdvideo}>
+          <video
+            ref={videoRefs.third}
+            onEnded={handleThirdVideoEnd}
+            autoPlay
+            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+          >
+            <source
+              src={
+                !isMobile
+                  ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v2.mp4"
+                  : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v2.mp4"
+              }
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      )}
+      {fourthvedio && (
+        <div className={Style.secondvedio}>
+          <video
+            ref={videoRefs.fourth}
+            autoPlay
+            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+          >
+            <source
+              src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/desktop-ghanta1-vp9-chrome.webm"
+              type="video/mp4"
+            />
+          </video>
+          <div className={Style.iconimg}>
+            <img
+              src="https://images.bhaskarassets.com/thumb/128x0/web2images/web-frontend/3D-Ram-Mandir/new-bell-icon-hi.png"
+              alt=""
+              onClick={() => playVideo(videoRefs.fourth, audioref)}
+            />
+            <audio ref={audioref}>
+              <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/ghanta2.mp3" />
+            </audio>
+          </div>
+          <div className={Style.buttonbar}>
+            <img
+              className={`${zoomin ? Style.zoomin : ""} ${
+                zoomin ? Style.zoomAnimation : ""
+              }`}
+              src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/cta-button-3-hi.png"
+              alt=""
+              onClick={() => {
+                setThirdvedio(false);
+                setFourthvedio(false);
+                setFifthvedio(true);
+                setZoomin(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {fifthvedio && (
         <div className={Style.fifthvideodata}>
           <div className={Style.vediobar}>
             <video
-              ref={fifthvedioref}
+              ref={videoRefs.fifth}
               autoPlay
-              controls
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleFifthVideoEnd}
               style={{ width: "100%", objectFit: "cover", height: "100vh" }}
             >
               <source
-                src="https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                src={
+                  !isMobile
+                    ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                    : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v3.mp4"
+                }
                 type="video/mp4"
               />
             </video>
           </div>
-
           {showButtonBar && (
             <div className={Style.prashadbar}>
-              {vedioEndedFirst && (
+              {videoEndedFirst && (
                 <div className={Style.dataanimation}>
                   <div className={Style.mainflower}>
                     <span>
                       <img
                         className={Style.img3}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/pusph-chadhaye-new.png"
-                        onClick={handleRoseClick}
                       />
                     </span>
                     <h2>पुष्प चढ़ाएं</h2>
@@ -137,7 +245,6 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                       <img
                         className={Style.img3}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/prasad-chadhayye-new.png"
-                        onClick={handlePrashadClick}
                       />
                     </span>
                     <h2>प्रसाद चढ़ाएं</h2>
@@ -147,17 +254,15 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                       <img
                         className={Style.img3}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/sri-ram-joti-jalayen-new.png"
-                        onClick={handleDiyaClick}
                       />
                     </span>
-                    <h2>श्रीराम ज्योति जलाएं</h2>
+                    <h2>ज्योति जलाएं</h2>
                   </div>
                   <div className={Style.mainflower}>
                     <span>
                       <img
                         className={Style.img3}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/poori-arti-kare-new.png"
-                        onClick={handleArtiClick}
                       />
                     </span>
                     <h2>पूरी आरती करें</h2>
@@ -210,7 +315,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                         onClick={handleDiyaClick}
                       />
                     </span>
-                    <h2>श्रीराम ज्योति जलाएं</h2>
+                    <h2>ज्योति जलाएं</h2>
                   </p>
                   <p>
                     <span>
@@ -231,13 +336,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
               )}
             </div>
           )}
-
-          {/* Rose Video */}
           {showRoseVideo && (
             <div className={Style.rosevideo}>
               <video
                 autoPlay
-                onEnded={Roseended}
+                onEnded={() => setShowRoseVideo(false)}
                 style={{ width: "100%", objectFit: "cover" }}
               >
                 <source
@@ -245,8 +348,60 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={roseref} onEnded={handleRoseAudioEnd}>
+              <audio ref={videoRefs.rose}>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/flower-shower.mp3" />
+              </audio>
+            </div>
+          )}
+          {showPrashadVedio && (
+            <div className={Style.prashadvideo}>
+              <video
+                autoPlay
+                onEnded={() => setShowPrashadVedio(false)}
+                style={{ width: "100%", objectFit: "cover" }}
+              >
+                <source
+                  src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/Prasad_SingleAnim-vp9-chrome.webm"
+                  type="video/webm"
+                />
+              </video>
+              <audio ref={videoRefs.prashad}>
+                <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/prasad-audio.mp3" />
+              </audio>
+            </div>
+          )}
+          {showDiyaVedio && (
+            <div className={Style.prashadvideo}>
+              <video
+                autoPlay
+                onEnded={() => setShowDiyaVedio(false)}
+                style={{ width: "100%", objectFit: "cover" }}
+              >
+                <source
+                  src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/RamJyoti_SingleAnim-vp9-chrome.webm"
+                  type="video/webm"
+                />
+              </video>
+              <audio ref={videoRefs.diya}>
+                <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/ram-jyoti-audio.mp3" />
+              </audio>
+            </div>
+          )}
+          {showArtiVedio && (
+            <div className={Style.prashadvideo}>
+              <video
+                autoPlay
+                loop
+                onEnded={() => setShowArtiVedio(false)}
+                style={{ width: "100%", objectFit: "none" }}
+              >
+                <source
+                  src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/AartiThali_Loop-vp9-chrome.webm"
+                  type="video/webm"
+                />
+              </video>
+              <audio ref={videoRefs.arti}>
+                <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/aarti-audio.mp3" />
               </audio>
             </div>
           )}
@@ -256,4 +411,4 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
   );
 };
 
-export default SriRam;
+export default Video;
