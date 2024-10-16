@@ -140,26 +140,28 @@
           }
         }
         .databar {
-          width: 100%;
           position: relative;
+
           p {
             width: 100%;
+            position: relative;
+            text-align: center;
+
             span {
-              display: block;
+              display: inline-block;
               position: relative;
               transform: translateX(-50%);
+              margin: 0 auto;
+              justify-content: center !important;
               .img1 {
-                width: 85px !important;
+                width: 82px !important;
               }
 
               .img2 {
-                left: 50%;
-                position: absolute;
-                top: 50%;
-                transform: translate(-50%, -50%);
                 width: 70px !important;
               }
             }
+
             h2 {
               font-size: 12px !important;
             }

@@ -169,7 +169,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
           <video
             ref={secondvedioref}
             autoPlay
-            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+            style={{ width: "100%", objectFit: "none", height: "100vh" }}
           >
             <source
               src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/desktop-ghanta1-vp9-chrome.webm"
@@ -222,7 +222,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
           <video
             ref={fourthvedioref}
             autoPlay
-            style={{ width: "100%", objectFit: "cover", height: "100vh" }}
+            style={{ width: "100%", objectFit: "none", height: "100vh" }}
           >
             <source
               src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/desktop-ghanta1-vp9-chrome.webm"

@@ -178,7 +178,11 @@
       }
     }
     .secondvedio {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      z-index: 9;
       .iconimg {
         width: 100%;
         img {
@@ -219,7 +223,6 @@
         bottom: -36px !important;
       }
       .databar {
-        width: 100%;
         position: relative;
 
         p {
@@ -234,15 +237,11 @@
             margin: 0 auto;
             justify-content: center !important;
             .img1 {
-              width: 73px !important;
+              width: 82px !important;
             }
 
             .img2 {
-              left: 42%;
-              position: absolute;
-              top: 54%;
-              transform: translate(-50%, -50%);
-              width: 63px !important;
+              width: 70px !important;
             }
           }
 

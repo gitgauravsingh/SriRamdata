@@ -144,7 +144,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/sri-ram-joti-jalayen-new.png"
                       />
                     </span>
-                    <h2>श्रीराम ज्योति जलाएं</h2>
+                    <h2>ज्योति जलाएं</h2>
                   </div>
                   <div className={Style.mainflower}>
                     <span>
@@ -207,7 +207,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                         onClick={handleDiyaClick}
                       />
                     </span>
-                    <h2>श्रीराम ज्योति जलाएं</h2>
+                    <h2>ज्योति जलाएं</h2>
                   </p>
 
                   <p>
