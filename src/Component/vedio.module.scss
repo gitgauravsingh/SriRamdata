@@ -221,20 +221,31 @@
       .databar {
         width: 100%;
         position: relative;
+
         p {
           width: 100%;
+          position: relative;
+          text-align: center;
+
           span {
-            display: block;
+            display: inline-block;
             position: relative;
             transform: translateX(-50%);
+            margin: 0 auto;
+            justify-content: center !important;
             .img1 {
-              width: 80px !important;
+              width: 73px !important;
             }
 
             .img2 {
-              width: 65px !important;
+              left: 42%;
+              position: absolute;
+              top: 54%;
+              transform: translate(-50%, -50%);
+              width: 63px !important;
             }
           }
+
           h2 {
             font-size: 12px !important;
           }
