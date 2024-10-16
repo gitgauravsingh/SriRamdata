@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Style from "./vedio.module.scss";
 
 export interface IVedio {
-  isfirstvedio: boolean;
-  setIsfirstvedio: React.Dispatch<React.SetStateAction<boolean>>;
+  isfirstvedio: any;
+  setIsfirstvedio: any;
 }
 
 const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
@@ -18,71 +18,120 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
   const [showArtiVedio, setShowArtiVedio] = useState(false);
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const [videoEndedFirst, setVideoEndedFirst] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  const audioref = useRef<HTMLAudioElement>(null);
-  const videoRefs = {
-    second: useRef<HTMLVideoElement>(null),
-    third: useRef<HTMLVideoElement>(null),
-    fourth: useRef<HTMLVideoElement>(null),
-    fifth: useRef<HTMLVideoElement>(null),
-    rose: useRef<HTMLVideoElement>(null),
-    prashad: useRef<HTMLVideoElement>(null),
-    diya: useRef<HTMLVideoElement>(null),
-    arti: useRef<HTMLVideoElement>(null),
-  };
+  const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
+  const [vedioFirst, setVideoFirst] = useState(window.innerWidth <= 768);
+  const audioref: any = useRef(null);
+  const secondvedioref: any = useRef(null);
+  const thirdvedioref: any = useRef(null);
+  const audioref1: any = useRef(null);
+  const fourthvedioref: any = useRef(null);
+  const fifthvedioref: any = useRef(null);
+  const roseref: any = useRef(null);
+  const prashadref: any = useRef(null);
+  const diyaref: any = useRef(null);
+  const artiref: any = useRef(null);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const mobiledata = () => {
+      const videomobile = window.innerWidth <= 768;
+      setVideoFirst(videomobile);
+    };
+    window.addEventListener("resize", mobiledata);
+    return () => {
+      window.removeEventListener("resize", mobiledata);
+    };
   }, []);
 
-  const handleVideoEnd = () => {
+  const handlevedioended = () => {
     setIsSecondvedio(true);
     setZoomin(true);
   };
 
-  const handleThirdVideoEnd = () => {
+  const Roseended = () => {
+    setShowRoseVideo(false);
+  };
+
+  const Prashadended = () => {
+    setShowPrashadVedio(false);
+  };
+
+  const diyaended = () => {
+    setShowDiyaVedio(false);
+  };
+
+  const artiended = () => {
+    setShowArtiVedio(false);
+  };
+
+  const handlethirdvedio = () => {
+    setIsfirstvedio(false);
+    setIsSecondvedio(false);
+    setThirdvedio(true);
+    setZoomin(false);
+  };
+
+  const handleIconClick = () => {
+    if (secondvedioref.current) {
+      secondvedioref.current.play();
+    }
+    if (audioref.current) {
+      audioref.current.play();
+    }
+  };
+
+  const handlevedioendedthird = () => {
     setFourthvedio(true);
     setZoomin(true);
   };
 
-  const handleFifthVideoEnd = () => {
-    setVideoEnded(true);
-    setVideoEndedFirst(false);
+  const handlefifthvedio = () => {
+    setThirdvedio(false);
+    setFourthvedio(false);
+    setFifthvedio(true);
+    setZoomin(false);
   };
 
-  const playVideo = (
-    ref: React.RefObject<HTMLVideoElement>,
-    audioRef: React.RefObject<HTMLAudioElement>
-  ) => {
-    ref.current?.play();
-    audioRef.current?.play();
+  const handleIconClick1 = () => {
+    if (fourthvedioref.current) {
+      fourthvedioref.current.play();
+    }
+    if (audioref1.current) {
+      audioref1.current.play();
+    }
   };
 
-  const handleShowVideo = (
-    setter: React.Dispatch<React.SetStateAction<boolean>>,
-    ref: React.RefObject<HTMLVideoElement>,
-    audioRef: React.RefObject<HTMLAudioElement>
-  ) => {
-    setter(true);
-    playVideo(ref, audioRef);
+  const handleRoseClick = () => {
+    if (roseref.current) {
+      roseref.current.play();
+    }
+    setShowRoseVideo(true);
   };
 
-  const handleRoseClick = () =>
-    handleShowVideo(setShowRoseVideo, videoRefs.rose, audioref);
-  const handlePrashadClick = () =>
-    handleShowVideo(setShowPrashadVedio, videoRefs.prashad, audioref);
-  const handleDiyaClick = () =>
-    handleShowVideo(setShowDiyaVedio, videoRefs.diya, audioref);
-  const handleArtiClick = () =>
-    handleShowVideo(setShowArtiVedio, videoRefs.arti, audioref);
+  const handlePrashadClick = () => {
+    setShowPrashadVedio(true);
+    if (prashadref.current) {
+      prashadref.current.play();
+    }
+  };
+
+  const handleDiyaClick = () => {
+    setShowDiyaVedio(true);
+    if (diyaref.current) {
+      diyaref.current.play();
+    }
+  };
+
+  const handleArtiClick = () => {
+    setShowArtiVedio(true);
+    if (artiref.current) {
+      artiref.current.play();
+    }
+  };
 
   const handleTimeUpdate = () => {
-    if (videoRefs.fifth.current) {
-      const { currentTime, duration } = videoRefs.fifth.current;
+    if (fifthvedioref.current) {
+      const currentTime = fifthvedioref.current.currentTime;
+      const duration = fifthvedioref.current.duration;
       if (duration - currentTime <= 15) {
         setShowButtonBar(true);
         setVideoEndedFirst(true);
@@ -90,18 +139,23 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
     }
   };
 
+  const handleFifthVideoEnd = () => {
+    setVideoEnded(true);
+    setVideoEndedFirst(false);
+  };
+
   return (
     <div className={Style.vediobar}>
       {isfirstvedio && (
         <div className={Style.firstvedio}>
           <video
-            onEnded={handleVideoEnd}
+            onEnded={handlevedioended}
             autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
             <source
               src={
-                !isMobile
+                !vedioFirst
                   ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v1.mp4"
                   : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v1.mp4"
               }
@@ -113,7 +167,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
       {isSecondvedio && (
         <div className={Style.secondvedio}>
           <video
-            ref={videoRefs.second}
+            ref={secondvedioref}
             autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
@@ -126,7 +180,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <img
               src="https://images.bhaskarassets.com/thumb/128x0/web2images/web-frontend/3D-Ram-Mandir/new-bell-icon-hi.png"
               alt=""
-              onClick={() => playVideo(videoRefs.second, audioref)}
+              onClick={handleIconClick}
             />
             <audio ref={audioref}>
               <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/ghanta2.mp3" />
@@ -139,12 +193,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
               }`}
               src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/cta-button-2-hi.png"
               alt=""
-              onClick={() => {
-                setIsfirstvedio(false);
-                setIsSecondvedio(false);
-                setThirdvedio(true);
-                setZoomin(false);
-              }}
+              onClick={handlethirdvedio}
             />
           </div>
         </div>
@@ -152,14 +201,14 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
       {thirdvedio && (
         <div className={Style.thirdvideo}>
           <video
-            ref={videoRefs.third}
-            onEnded={handleThirdVideoEnd}
+            ref={thirdvedioref}
+            onEnded={handlevedioendedthird}
             autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
             <source
               src={
-                !isMobile
+                !vedioFirst
                   ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v2.mp4"
                   : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v2.mp4"
               }
@@ -171,7 +220,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
       {fourthvedio && (
         <div className={Style.secondvedio}>
           <video
-            ref={videoRefs.fourth}
+            ref={fourthvedioref}
             autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
@@ -184,9 +233,9 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <img
               src="https://images.bhaskarassets.com/thumb/128x0/web2images/web-frontend/3D-Ram-Mandir/new-bell-icon-hi.png"
               alt=""
-              onClick={() => playVideo(videoRefs.fourth, audioref)}
+              onClick={handleIconClick1}
             />
-            <audio ref={audioref}>
+            <audio ref={audioref1}>
               <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/ghanta2.mp3" />
             </audio>
           </div>
@@ -197,12 +246,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
               }`}
               src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/cta-button-3-hi.png"
               alt=""
-              onClick={() => {
-                setThirdvedio(false);
-                setFourthvedio(false);
-                setFifthvedio(true);
-                setZoomin(false);
-              }}
+              onClick={handlefifthvedio}
             />
           </div>
         </div>
@@ -211,7 +255,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
         <div className={Style.fifthvideodata}>
           <div className={Style.vediobar}>
             <video
-              ref={videoRefs.fifth}
+              ref={fifthvedioref}
               autoPlay
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleFifthVideoEnd}
@@ -219,7 +263,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             >
               <source
                 src={
-                  !isMobile
+                  !vedioFirst
                     ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
                     : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v3.mp4"
                 }
@@ -229,7 +273,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
           </div>
           {showButtonBar && (
             <div className={Style.prashadbar}>
-              {videoEndedFirst && (
+              {vedioEndedFirst && (
                 <div className={Style.dataanimation}>
                   <div className={Style.mainflower}>
                     <span>
@@ -279,6 +323,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
+
                       <img
                         className={Style.img2}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/pusph-chadhaye-new.png"
@@ -294,6 +339,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
+
                       <img
                         className={Style.img2}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/prasad-chadhayye-new.png"
@@ -302,6 +348,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                     </span>
                     <h2>प्रसाद चढ़ाएं</h2>
                   </p>
+
                   <p>
                     <span>
                       <img
@@ -309,6 +356,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
+
                       <img
                         className={Style.img2}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/sri-ram-joti-jalayen-new.png"
@@ -317,6 +365,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                     </span>
                     <h2>ज्योति जलाएं</h2>
                   </p>
+
                   <p>
                     <span>
                       <img
@@ -324,6 +373,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
+
                       <img
                         className={Style.img2}
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/poori-arti-kare-new.png"
@@ -340,7 +390,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <div className={Style.rosevideo}>
               <video
                 autoPlay
-                onEnded={() => setShowRoseVideo(false)}
+                onEnded={Roseended}
                 style={{ width: "100%", objectFit: "cover" }}
               >
                 <source
@@ -348,7 +398,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={videoRefs.rose}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/flower-shower.mp3" />
               </audio>
             </div>
@@ -357,7 +407,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <div className={Style.prashadvideo}>
               <video
                 autoPlay
-                onEnded={() => setShowPrashadVedio(false)}
+                onEnded={Prashadended}
                 style={{ width: "100%", objectFit: "cover" }}
               >
                 <source
@@ -365,7 +415,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={videoRefs.prashad}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/prasad-audio.mp3" />
               </audio>
             </div>
@@ -374,7 +424,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <div className={Style.prashadvideo}>
               <video
                 autoPlay
-                onEnded={() => setShowDiyaVedio(false)}
+                onEnded={diyaended}
                 style={{ width: "100%", objectFit: "cover" }}
               >
                 <source
@@ -382,7 +432,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={videoRefs.diya}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/ram-jyoti-audio.mp3" />
               </audio>
             </div>
@@ -392,7 +442,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
               <video
                 autoPlay
                 loop
-                onEnded={() => setShowArtiVedio(false)}
+                onEnded={artiended}
                 style={{ width: "100%", objectFit: "none" }}
               >
                 <source
@@ -400,7 +450,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={videoRefs.arti}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/aarti-audio.mp3" />
               </audio>
             </div>

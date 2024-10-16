@@ -242,7 +242,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={roseref}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/flower-shower.mp3" />
               </audio>
             </div>
@@ -259,7 +259,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={prashadref}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/prasad-audio.mp3" />
               </audio>
             </div>
@@ -276,7 +276,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={diyaref}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/ram-jyoti-audio.mp3" />
               </audio>
             </div>
@@ -294,7 +294,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio ref={artiref}>
+              <audio autoPlay>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/aarti-audio.mp3" />
               </audio>
             </div>
