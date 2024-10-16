@@ -342,7 +342,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                         onClick={handleDiyaClick}
                       />
                     </span>
-                    <h2>श्रीराम ज्योति जलाएं</h2>
+                    <h2>ज्योति जलाएं</h2>
                   </p>
 
                   <p>
