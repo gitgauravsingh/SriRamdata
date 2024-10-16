@@ -1,0 +1,48 @@
+.headerbar {
+  display: block;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  padding: 10px 0px;
+  z-index: 99;
+  .wrapper {
+    width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .mainhead {
+      display: block;
+      img {
+        width: 120px;
+        height: 30px;
+      }
+    }
+    .iconbar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      i {
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .headerbar {
+    width: 100%;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    left: 34%;
+    .wrapper {
+      width: 100%;
+      .mainhead {
+      }
+      .iconbar {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.bannerbar {
+  background-image: url("https://images.bhaskarassets.com/thumb/2048x0/web2images/web-frontend/3D-Ram-Mandir/new-main-bg-v1-desktop-hi.jpg");
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  .wrapper {
+    width: 1170px;
+    margin: 0 auto;
+    .imgbar {
+      display: flex;
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(-50%);
+      width: 100%s;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .bannerbar {
+    background-image: url("https://images.bhaskarassets.com/thumb/2048x0/web2images/web-frontend/3D-Ram-Mandir/new-main-bg-v1-mobile-hi.jpg");
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    .wrapper {
+      width: 100%;
+      .imgbar {
+        bottom: 5%;
+        flex-direction: column;
+        width: 100%;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
