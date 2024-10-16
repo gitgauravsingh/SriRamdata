@@ -203,7 +203,7 @@
       width: 100%;
       .dataanimation {
         width: 100%;
-        gap: 0;
+        bottom: 50px;
         .mainflower {
           width: 100%;
           span {
@@ -220,6 +220,7 @@
       .databar {
         width: 100%;
         position: relative;
+        bottom: 50px;
         p {
           width: 100%;
           span {
