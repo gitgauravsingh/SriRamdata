@@ -422,7 +422,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                 autoPlay
                 loop
                 onEnded={artiended}
-                style={{ width: "100%" }}
+                style={{ width: "100%", objectFit: "none" }}
               >
                 <source
                   src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/AartiThali_Loop-vp9-chrome.webm"
