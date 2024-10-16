@@ -201,10 +201,10 @@
     position: relative;
     .prashadbar {
       width: 100%;
-      bottom: 15%;
+      bottom: 15% !important;
       .dataanimation {
         width: 100%;
-        bottom: 15%;
+        bottom: 15% !important;
         .mainflower {
           width: 100%;
           span {
@@ -221,7 +221,7 @@
       .databar {
         width: 100%;
         position: relative;
-        bottom: 15%;
+        bottom: 15% !important;
         p {
           width: 100%;
           span {
