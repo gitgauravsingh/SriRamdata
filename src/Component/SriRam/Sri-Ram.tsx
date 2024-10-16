@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Style from "./sriram.module.scss";
 
 export interface ISriRam {
@@ -14,11 +14,23 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
+  const [vedioFirst, setVideoFirst] = useState(window.innerWidth <= 768);
   const fifthvedioref: any = useRef(null);
   const roseref: any = useRef(null);
   const prashadref: any = useRef(null);
   const diyaref: any = useRef(null);
   const artiref: any = useRef(null);
+
+  useEffect(() => {
+    const mobiledata = () => {
+      const videomobile = window.innerWidth <= 768;
+      setVideoFirst(videomobile);
+    };
+    window.addEventListener("resize", mobiledata);
+    return () => {
+      window.removeEventListener("resize", mobiledata);
+    };
+  }, []);
 
   const Roseended = () => {
     setShowRoseVideo(false);
@@ -89,13 +101,16 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
             <video
               ref={fifthvedioref}
               autoPlay
-              controls
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleFifthVideoEnd}
               style={{ width: "100%", objectFit: "cover", height: "100vh" }}
             >
               <source
-                src="https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                src={
+                  !vedioFirst
+                    ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                    : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v3.mp4"
+                }
                 type="video/mp4"
               />
             </video>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Style from "./vedio.module.scss";
 
 export interface IVedio {
@@ -19,6 +19,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
+  const [vedioFirst, setVideoFirst] = useState(window.innerWidth <= 768);
   const audioref: any = useRef(null);
   const secondvedioref: any = useRef(null);
   const thirdvedioref: any = useRef(null);
@@ -29,6 +30,17 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
   const prashadref: any = useRef(null);
   const diyaref: any = useRef(null);
   const artiref: any = useRef(null);
+
+  useEffect(() => {
+    const mobiledata = () => {
+      const videomobile = window.innerWidth <= 768;
+      setVideoFirst(videomobile);
+    };
+    window.addEventListener("resize", mobiledata);
+    return () => {
+      window.removeEventListener("resize", mobiledata);
+    };
+  }, []);
 
   const handlevedioended = () => {
     setIsSecondvedio(true);
@@ -139,11 +151,14 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
           <video
             onEnded={handlevedioended}
             autoPlay
-            controls
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
             <source
-              src="https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v1.mp4"
+              src={
+                !vedioFirst
+                  ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v1.mp4"
+                  : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v1.mp4"
+              }
               type="video/mp4"
             />
           </video>
@@ -186,14 +201,17 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
       {thirdvedio && (
         <div className={Style.thirdvideo}>
           <video
-            controls
             ref={thirdvedioref}
             onEnded={handlevedioendedthird}
             autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
             <source
-              src="https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v2.mp4"
+              src={
+                !vedioFirst
+                  ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v2.mp4"
+                  : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v2.mp4"
+              }
               type="video/mp4"
             />
           </video>
@@ -239,13 +257,16 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
             <video
               ref={fifthvedioref}
               autoPlay
-              controls
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleFifthVideoEnd}
               style={{ width: "100%", objectFit: "cover", height: "100vh" }}
             >
               <source
-                src="https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                src={
+                  !vedioFirst
+                    ? "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-desktop-p3-v3.mp4"
+                    : "https://www.bhaskar.com/__static__/2.0/ram-mandir/videos/v8/hi-mobile-p3-v3.mp4"
+                }
                 type="video/mp4"
               />
             </video>
