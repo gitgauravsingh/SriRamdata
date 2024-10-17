@@ -345,7 +345,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   type="video/webm"
                 />
               </video>
-              <audio autoPlay>
+              <audio autoPlay loop>
                 <source src="https://www.bhaskar.com/__static__/2.0/ram-mandir/audio/v1/aarti-audio.mp3" />
               </audio>
             </div>
