@@ -286,7 +286,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
               <video
                 autoPlay
                 onEnded={Roseended}
-                style={{ width: "100%", objectFit: "cover" }}
+                style={{ width: "100%", objectFit: "cover", height: "100%" }}
               >
                 <source
                   src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/Flower_SingleAnim-vp9-chrome.webm"
@@ -303,7 +303,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
               <video
                 autoPlay
                 onEnded={Prashadended}
-                style={{ width: "100%", objectFit: "cover" }}
+                style={{ width: "100%", objectFit: "cover", height: "100%" }}
               >
                 <source
                   src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/Prasad_SingleAnim-vp9-chrome.webm"
@@ -320,7 +320,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
               <video
                 autoPlay
                 onEnded={diyaended}
-                style={{ width: "100%", objectFit: "cover" }}
+                style={{ width: "100%", objectFit: "cover", height: "100%" }}
               >
                 <source
                   src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/RamJyoti_SingleAnim-vp9-chrome.webm"
@@ -338,7 +338,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                 autoPlay
                 loop
                 onEnded={artiended}
-                style={{ width: "100%", objectFit: "none" }}
+                style={{ width: "100%", objectFit: "none", height: "100%" }}
               >
                 <source
                   src="https://www.bhaskar.com/__static__/2.0/ram-mandir/interactions/v1/desktop/AartiThali_Loop-vp9-chrome.webm"
