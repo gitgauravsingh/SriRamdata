@@ -32,7 +32,6 @@
         margin: 0;
         position: relative;
         bottom: 30px;
-
         .mainflower {
           cursor: pointer;
           display: block;
@@ -58,18 +57,18 @@
       }
       .overlaybar {
         position: absolute;
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.2);
         width: 100%;
         height: 220px;
-        bottom: -16px;
+        bottom: -15px;
       }
       .databar {
+        bottom: 30px;
         display: flex;
         list-style: none;
         padding: 0;
         margin: 0;
         position: relative;
-        bottom: 30px;
         p {
           cursor: pointer;
           display: block;
@@ -120,12 +119,11 @@
     width: 100%;
     .fifthvideodata {
       width: 100%;
-      position: relative;
       .prashadbar {
         width: 100%;
+        bottom: 40px !important;
         .dataanimation {
           width: 100%;
-          gap: 0;
           .mainflower {
             width: 100%;
             span {
@@ -138,6 +136,10 @@
               font-size: 12px !important;
             }
           }
+        }
+        .overlaybar {
+          height: 172px !important;
+          bottom: -36px !important;
         }
         .databar {
           position: relative;
