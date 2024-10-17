@@ -14,6 +14,9 @@ const Header = () => {
           <i className="fa-brands fa-twitter"></i>
           <i className="fa-solid fa-link"></i>
         </div>
+        <div className={Style.shareicon}>
+          <i className="fa-solid fa-share-nodes"></i>
+        </div>
       </div>
     </div>
   );

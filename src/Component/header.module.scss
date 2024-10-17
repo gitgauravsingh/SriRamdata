@@ -5,6 +5,7 @@
   top: 0px;
   padding: 10px 0px;
   z-index: 99;
+  background: rgba(0, 0, 0, 0.1);
   .wrapper {
     width: 1170px;
     margin: 0 auto;
@@ -27,21 +28,30 @@
         color: #fff;
       }
     }
+    .shareicon {
+      display: none;
+      i {
+        font-size: 20px;
+        color: #fff;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 768px) {
   .headerbar {
     width: 100%;
-    padding: 10px 0px;
+    padding: 10px 10px;
     box-sizing: border-box;
-    left: 34%;
     .wrapper {
       width: 100%;
       .mainhead {
       }
       .iconbar {
         display: none;
+      }
+      .shareicon {
+        display: block;
       }
     }
   }
