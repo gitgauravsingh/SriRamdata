@@ -19,6 +19,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
+  const [rotateImg1, setRotateImg1] = useState(true);
   const [vedioFirst, setVideoFirst] = useState(window.innerWidth <= 768);
   const audioref: any = useRef(null);
   const secondvedioref: any = useRef(null);
@@ -49,18 +50,22 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
 
   const Roseended = () => {
     setShowRoseVideo(false);
+    setRotateImg1(true);
   };
 
   const Prashadended = () => {
     setShowPrashadVedio(false);
+    setRotateImg1(true);
   };
 
   const diyaended = () => {
     setShowDiyaVedio(false);
+    setRotateImg1(true);
   };
 
   const artiended = () => {
     setShowArtiVedio(false);
+    setRotateImg1(true);
   };
 
   const handlethirdvedio = () => {
@@ -105,10 +110,12 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
       roseref.current.play();
     }
     setShowRoseVideo(true);
+    setRotateImg1(false);
   };
 
   const handlePrashadClick = () => {
     setShowPrashadVedio(true);
+    setRotateImg1(false);
     if (prashadref.current) {
       prashadref.current.play();
     }
@@ -116,6 +123,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
 
   const handleDiyaClick = () => {
     setShowDiyaVedio(true);
+    setRotateImg1(false);
     if (diyaref.current) {
       diyaref.current.play();
     }
@@ -123,6 +131,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
 
   const handleArtiClick = () => {
     setShowArtiVedio(true);
+    setRotateImg1(false);
     if (artiref.current) {
       artiref.current.play();
     }
@@ -319,7 +328,11 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -335,7 +348,11 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -352,7 +369,11 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -369,7 +390,11 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />

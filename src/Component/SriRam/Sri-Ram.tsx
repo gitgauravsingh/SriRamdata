@@ -14,6 +14,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
   const [showButtonBar, setShowButtonBar] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [vedioEndedFirst, setVideoEndedFirst] = useState(false);
+  const [rotateImg1, setRotateImg1] = useState(true);
   const [vedioFirst, setVideoFirst] = useState(window.innerWidth <= 768);
   const fifthvedioref: any = useRef(null);
   const roseref: any = useRef(null);
@@ -34,22 +35,27 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
 
   const Roseended = () => {
     setShowRoseVideo(false);
+    setRotateImg1(true);
   };
 
   const Prashadended = () => {
     setShowPrashadVedio(false);
+    setRotateImg1(true);
   };
 
   const diyaended = () => {
     setShowDiyaVedio(false);
+    setRotateImg1(true);
   };
 
   const artiended = () => {
     setShowArtiVedio(false);
+    setRotateImg1(true);
   };
 
   const handleRoseClick = () => {
     setShowRoseVideo(true);
+    setRotateImg1(false);
     if (roseref.current) {
       roseref.current.play();
     }
@@ -57,6 +63,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
 
   const handlePrashadClick = () => {
     setShowPrashadVedio(true);
+    setRotateImg1(false);
     if (prashadref.current) {
       prashadref.current.play();
     }
@@ -64,6 +71,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
 
   const handleDiyaClick = () => {
     setShowDiyaVedio(true);
+    setRotateImg1(false);
     if (diyaref.current) {
       diyaref.current.play();
     }
@@ -71,8 +79,17 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
 
   const handleArtiClick = () => {
     setShowArtiVedio(true);
+    setRotateImg1(false);
     if (artiref.current) {
       artiref.current.play();
+    }
+  };
+
+  const handlePalyVedio = () => {
+    if (fifthvedioref.current) {
+      const totalDuration = fifthvedioref.current.duration;
+      fifthvedioref.current.currentTime = Math.max(0, totalDuration - 20);
+      fifthvedioref.current.play();
     }
   };
 
@@ -87,8 +104,23 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
     }
   };
 
+  const handleLoadedMetadata = () => {
+    const videodata = fifthvedioref.current;
+    if (videodata) {
+      videodata.addEventListener("timeupdate", handleTimeUpdate);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      const videodata = fifthvedioref.current;
+      if (videodata) {
+        videodata.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+    };
+  }, []);
+
   const handleFifthVideoEnd = () => {
-    setIsSriRam(false);
     setVideoEnded(true);
     setVideoEndedFirst(false);
   };
@@ -101,8 +133,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
             <video
               ref={fifthvedioref}
               autoPlay
-              onTimeUpdate={handleTimeUpdate}
               onEnded={handleFifthVideoEnd}
+              onLoadedMetadata={() => {
+                handlePalyVedio();
+                handleLoadedMetadata();
+              }}
               style={{ width: "100%", objectFit: "cover", height: "100vh" }}
             >
               <source
@@ -163,7 +198,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -179,7 +218,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -196,7 +239,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
@@ -213,7 +260,11 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
                   <p>
                     <span>
                       <img
-                        className={Style.img1}
+                        className={
+                          rotateImg1
+                            ? Style.img1
+                            : Style.img1 + " " + Style.rotate
+                        }
                         src="https://images.bhaskarassets.com/thumb/512x0/web2images/web-frontend/3D-Ram-Mandir/light-effect.png"
                         alt=""
                       />
