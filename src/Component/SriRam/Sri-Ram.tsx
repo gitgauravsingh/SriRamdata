@@ -97,7 +97,7 @@ const SriRam: React.FC<ISriRam> = ({ isSriRam, setIsSriRam }) => {
     if (fifthvedioref.current) {
       const currentTime = fifthvedioref.current.currentTime;
       const duration = fifthvedioref.current.duration;
-      if (duration - currentTime <= 20) {
+      if (duration - currentTime <= 10) {
         setShowButtonBar(true);
         setVideoEndedFirst(true);
       }
