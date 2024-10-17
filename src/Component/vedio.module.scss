@@ -107,7 +107,7 @@
       }
       .overlaybar {
         position: absolute;
-        background: rgba(0, 0, 0, 0.2);
+        background: linear-gradient(1turn, rgba(0, 0, 0, 0.7), transparent);
         width: 100%;
         height: 220px;
         bottom: -15px;
@@ -235,7 +235,7 @@
         }
       }
       .overlaybar {
-        height: 172px !important;
+        height: 190px !important;
         bottom: -36px !important;
       }
       .databar {
