@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/SriRamdata/static/css/main.fed7d0d6.css",
+    "main.css": "/SriRamdata/static/css/main.a137c13f.css",
     "main.js": "/SriRamdata/static/js/main.02e8d83d.js",
     "static/media/gs-logo-removebg-preview.png": "/SriRamdata/static/media/gs-logo-removebg-preview.8a9c32a8f4ea36ffffbd.png",
     "index.html": "/SriRamdata/index.html",
-    "main.fed7d0d6.css.map": "/SriRamdata/static/css/main.fed7d0d6.css.map",
+    "main.a137c13f.css.map": "/SriRamdata/static/css/main.a137c13f.css.map",
     "main.02e8d83d.js.map": "/SriRamdata/static/js/main.02e8d83d.js.map"
   },
   "entrypoints": [
-    "static/css/main.fed7d0d6.css",
+    "static/css/main.a137c13f.css",
     "static/js/main.02e8d83d.js"
   ]
 }
