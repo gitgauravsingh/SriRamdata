@@ -141,7 +141,7 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
     if (fifthvedioref.current) {
       const currentTime = fifthvedioref.current.currentTime;
       const duration = fifthvedioref.current.duration;
-      if (duration - currentTime <= 15) {
+      if (duration - currentTime <= 20) {
         setShowButtonBar(true);
         setVideoEndedFirst(true);
       }
