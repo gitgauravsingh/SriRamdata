@@ -177,7 +177,6 @@ const Video: React.FC<IVedio> = ({ isfirstvedio, setIsfirstvedio }) => {
         <div className={Style.secondvedio}>
           <video
             ref={secondvedioref}
-            autoPlay
             style={{ width: "100%", objectFit: "cover", height: "100vh" }}
           >
             <source
